@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오현준 — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+/* =============================================
+   오현준 Portfolio — Main Stylesheet
+   ============================================= */
+
+/* --- Variables --- */
+:root {
+  --bg: #0e0e0e;
+  --bg2: #141414;
+  --surface: #1a1a1a;
+  --border: rgba(255,255,255,0.08);
+  --text: #f0ede8;
+  --muted: rgba(240,237,232,0.45);
+  --accent: oklch(78% 0.22 145);   /* 네온 그린 */
+  --accent2: oklch(78% 0.22 200);  /* 청록 */
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --nav-h: 64px;
+  --max-w: 1200px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+/* --- Scroll Reveal --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+/* =============================================
+   NAV
+   ============================================= */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  gap: 40px;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+}
+#nav.scrolled {
+  background: rgba(14,14,14,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+.accent { color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--muted);
+  transition: color 0.25s;
+  letter-spacing: 0.02em;
+}
+.nav-links a:hover { color: var(--text); }
+.btn-resume {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 8px 18px;
+  border-radius: 100px;
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+.btn-resume:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* =============================================
+   HERO
+   ============================================= */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  overflow: hidden;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-w);
+  width: 100%;
+  margin: 0 auto;
+  padding-top: var(--nav-h);
+}
+.hero-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  font-family: var(--font-head);
+  font-weight: 500;
+}
+.hero-name {
+  font-family: var(--font-head);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.hero-name-en {
+  font-weight: 300;
+  font-size: 0.55em;
+  color: var(--muted);
+  display: block;
+  margin-top: 8px;
+}
+.hero-desc {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--muted);
+  margin-bottom: 48px;
+  letter-spacing: 0.04em;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  padding: 14px 28px;
+  border-radius: 100px;
+  transition: border-color 0.25s, background 0.25s, color 0.25s;
+}
+.hero-cta:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.hero-cta .arrow {
+  transition: transform 0.3s var(--ease);
+}
+.hero-cta:hover .arrow { transform: translateY(4px); }
+
+.hero-bg-text {
+  position: absolute;
+  right: -2vw;
+  bottom: -4vw;
+  font-family: var(--font-head);
+  font-size: clamp(8rem, 22vw, 22rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.02);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* =============================================
+   SECTION COMMON
+   ============================================= */
+section {
+  padding: 120px 40px;
+}
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 56px;
+  font-weight: 500;
+}
+
+/* =============================================
+   ABOUT
+   ============================================= */
+#about { background: var(--bg2); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 80px;
+  align-items: start;
+}
+.about-left h2 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+}
+.about-bio {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 36px;
+}
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.about-tags li {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.about-tags li:hover { border-color: var(--accent); color: var(--accent); }
+.about-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--surface);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border);
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* =============================================
+   WORKS
+   ============================================= */
+#works { background: var(--bg); }
+
+.works-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(100,220,140,0.06);
+}
+
+.works-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.work-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 4px;
+  position: relative;
+}
+.work-item:first-child { border-top: 1px solid var(--border); }
+
+/* Thumbnail */
+.work-thumb {
+  overflow: hidden;
+  border-radius: 4px;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+}
+.work-thumb-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s var(--ease);
+  position: relative;
+}
+.work-item:hover .work-thumb-img {
+  transform: scale(1.04);
+}
+.thumb-label {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+}
+
+/* Meta row */
+.work-meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.work-num {
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  width: 28px;
+}
+.work-info {
+  flex: 1;
+}
+.work-title {
+  font-family: var(--font-head);
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+.work-item:hover .work-title { color: var(--accent); }
+.work-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.work-year {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.work-arrow {
+  font-size: 1.2rem;
+  color: var(--muted);
+  transition: transform 0.3s var(--ease), color 0.2s;
+  flex-shrink: 0;
+}
+.work-item:hover .work-arrow {
+  transform: translateX(6px);
+  color: var(--accent);
+}
+
+/* hidden via filter */
+.work-item.hidden {
+  display: none;
+}
+
+/* =============================================
+   AWARDS
+   ============================================= */
+#awards { background: var(--bg2); }
+.awards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.award-item {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+.awards-grid .award-item:first-child { border-top: 1px solid var(--border); }
+.award-year {
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 42px;
+}
+.award-body { flex: 1; }
+.award-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.award-org {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.award-badge {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 13px;
+  border-radius: 100px;
+  background: rgba(100,220,140,0.12);
+  color: var(--accent);
+  border: 1px solid rgba(100,220,140,0.25);
+  flex-shrink: 0;
+}
+.award-badge--exp {
+  background: rgba(100,200,220,0.10);
+  color: var(--accent2);
+  border-color: rgba(100,200,220,0.2);
+}
+
+/* =============================================
+   CONTACT / FOOTER
+   ============================================= */
+#contact {
+  background: var(--bg);
+  padding-bottom: 60px;
+}
+.contact-heading {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 60px;
+}
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding-right: 32px;
+  transition: background 0.2s;
+}
+.contact-link:nth-child(4n) { border-right: none; }
+.contact-link:hover { background: rgba(255,255,255,0.015); }
+.contact-link-label {
+  font-family: var(--font-head);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.contact-link-val {
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.contact-link:hover .contact-link-val { color: var(--accent); }
+.btn-resume-large {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 18px 36px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  transition: all 0.25s;
+}
+.btn-resume-large:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+.footer-bottom {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: var(--font-head);
+  letter-spacing: 0.04em;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 860px) {
+  #nav { padding: 0 20px; gap: 20px; }
+  .nav-links { display: none; }
+  section { padding: 80px 20px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-right { order: -1; }
+  .about-photo-placeholder { aspect-ratio: 4/3; max-width: 300px; }
+  .work-item { grid-template-columns: 120px 1fr; gap: 16px; }
+  .hero-bg-text { display: none; }
+  .contact-links { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 540px) {
+  .work-item { grid-template-columns: 1fr; }
+  .work-thumb { display: none; }
+  .contact-links { grid-template-columns: 1fr; }
+  .contact-link { border-right: none; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-logo">HJ<span class="accent">.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="assets/resume.pdf" download class="btn-resume">Resume ↓</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-label reveal">Portfolio — 2026</div>
+      <h1 class="hero-name reveal delay-1">오현준<br /><span class="hero-name-en">Hyunjoon Oh</span></h1>
+      <p class="hero-desc reveal delay-2">영상 · 모션 · 개발 · 게임 · 그래픽</p>
+      <a href="#works" class="hero-cta reveal delay-3">Works 보기 <span class="arrow">↓</span></a>
+    </div>
+    <div class="hero-bg-text" aria-hidden="true">PORTFOLIO</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">01 — About</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <h2 class="reveal">디자인과 기술의<br />경계에서 작업합니다.</h2>
+          <p class="about-bio reveal delay-1">
+            영상, 모션 그래픽, 게임 개발, 그래픽 디자인을 아우르는<br />
+            크리에이티브 작업자입니다. 아이디어를 시각과 인터랙션으로<br />
+            구현하는 것을 즐깁니다.
+          </p>
+          <ul class="about-tags reveal delay-2">
+            <li>영상/모션</li>
+            <li>개발/코딩</li>
+            <li>게임</li>
+            <li>그래픽 디자인</li>
+          </ul>
+        </div>
+        <div class="about-right reveal delay-1">
+          <div class="about-photo-placeholder">
+            <span>Photo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section id="works">
+    <div class="section-inner">
+      <div class="section-label">02 — Works</div>
+      <div class="works-filter reveal">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="motion">영상/모션</button>
+        <button class="filter-btn" data-filter="dev">개발/코딩</button>
+        <button class="filter-btn" data-filter="game">게임</button>
+        <button class="filter-btn" data-filter="graphic">그래픽</button>
+      </div>
+
+      <!-- =============================================
+           WORKS LIST — 작품 추가는 여기에 항목을 복사해서 붙여넣기
+           data-category: motion | dev | game | graphic
+           href: projects/[작품폴더]/index.html
+           ============================================= -->
+      <div class="works-list" id="works-list">
+
+        <a href="projects/project-01/index.html" class="work-item reveal" data-category="motion">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#1a1a2e;">
+              <span class="thumb-label">영상/모션</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">001</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2026</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-02/index.html" class="work-item reveal" data-category="dev">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#0d1b2a;">
+              <span class="thumb-label">개발/코딩</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">002</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2026</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-03/index.html" class="work-item reveal" data-category="game">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#12201a;">
+              <span class="thumb-label">게임</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">003</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2025</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-04/index.html" class="work-item reveal" data-category="graphic">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#1e1020;">
+              <span class="thumb-label">그래픽</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">004</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2025</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-05/index.html" class="work-item reveal" data-category="motion">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#1a1a2e;">
+              <span class="thumb-label">영상/모션</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">005</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2025</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-06/index.html" class="work-item reveal" data-category="dev">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#0d1b2a;">
+              <span class="thumb-label">개발/코딩</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">006</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2025</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-07/index.html" class="work-item reveal" data-category="game">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#12201a;">
+              <span class="thumb-label">게임</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">007</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2024</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-08/index.html" class="work-item reveal" data-category="graphic">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#1e1020;">
+              <span class="thumb-label">그래픽</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">008</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2024</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-09/index.html" class="work-item reveal" data-category="motion">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#1a1a2e;">
+              <span class="thumb-label">영상/모션</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">009</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2024</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+        <a href="projects/project-10/index.html" class="work-item reveal" data-category="dev">
+          <div class="work-thumb">
+            <div class="work-thumb-img" style="background:#0d1b2a;">
+              <span class="thumb-label">개발/코딩</span>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-num">010</span>
+            <div class="work-info">
+              <h3 class="work-title">작품 제목을 입력하세요</h3>
+              <p class="work-desc">짧은 설명 — 툴, 기간, 키워드 등</p>
+            </div>
+            <span class="work-year">2024</span>
+            <span class="work-arrow">→</span>
+          </div>
+        </a>
+
+      </div>
+      <!-- / WORKS LIST -->
+
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="section-inner">
+      <div class="section-label">03 — Awards &amp; History</div>
+      <div class="awards-grid">
+
+        <!-- =============================================
+             AWARDS — 항목 추가는 여기에 .award-item 복사
+             ============================================= -->
+        <div class="award-item reveal">
+          <span class="award-year">2026</span>
+          <div class="award-body">
+            <h3 class="award-title">수상/이력 제목</h3>
+            <p class="award-org">주관 기관 / 대회명</p>
+          </div>
+          <span class="award-badge">수상</span>
+        </div>
+
+        <div class="award-item reveal delay-1">
+          <span class="award-year">2025</span>
+          <div class="award-body">
+            <h3 class="award-title">수상/이력 제목</h3>
+            <p class="award-org">주관 기관 / 대회명</p>
+          </div>
+          <span class="award-badge">수상</span>
+        </div>
+
+        <div class="award-item reveal delay-2">
+          <span class="award-year">2025</span>
+          <div class="award-body">
+            <h3 class="award-title">프로젝트 / 활동명</h3>
+            <p class="award-org">소속 / 기관</p>
+          </div>
+          <span class="award-badge award-badge--exp">활동</span>
+        </div>
+
+        <div class="award-item reveal delay-3">
+          <span class="award-year">2024</span>
+          <div class="award-body">
+            <h3 class="award-title">수상/이력 제목</h3>
+            <p class="award-org">주관 기관 / 대회명</p>
+          </div>
+          <span class="award-badge">수상</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact">
+    <div class="section-inner">
+      <div class="section-label">04 — Contact</div>
+      <h2 class="contact-heading reveal">함께 만들어요.</h2>
+      <div class="contact-links reveal delay-1">
+        <!-- SNS 링크 — href를 실제 URL로 교체 -->
+        <a href="mailto:your@email.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">your@email.com</span>
+        </a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-val">@username</span>
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-label">Instagram</span>
+          <span class="contact-link-val">@username</span>
+        </a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-label">YouTube</span>
+          <span class="contact-link-val">채널명</span>
+        </a>
+      </div>
+      <a href="assets/resume.pdf" download class="btn-resume-large reveal delay-2">Resume 다운로드 ↓</a>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 오현준</span>
+      <span>Made with care.</span>
+    </div>
+  </footer>
+
+  <script>
+/* =============================================
+   main.js — 오현준 Portfolio
+   ============================================= */
+
+// --- Nav scroll effect ---
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+// --- Scroll Reveal ---
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// --- Works Filter ---
+const filterBtns = document.querySelectorAll('.filter-btn');
+const workItems = document.querySelectorAll('.work-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    let visibleIndex = 0;
+
+    workItems.forEach(item => {
+      const match = filter === 'all' || item.dataset.category === filter;
+      if (match) {
+        item.classList.remove('hidden');
+        // stagger re-reveal
+        item.style.transitionDelay = `${visibleIndex * 0.04}s`;
+        visibleIndex++;
+      } else {
+        item.classList.add('hidden');
+        item.style.transitionDelay = '0s';
+      }
+    });
+  });
+});
+
+// --- Active nav highlight on scroll ---
+const sections = document.querySelectorAll('section[id], footer[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${entry.target.id}`
+          ? 'var(--text)'
+          : '';
+      });
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+</script>
+</body>
+</html>
